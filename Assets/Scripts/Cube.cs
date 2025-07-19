@@ -6,7 +6,12 @@ public class Cube : MonoBehaviour
     private Rigidbody _rigidbody;
 
     private Color _defaultColor = Color.white;
-    private float _lifeTime = 5f;
+
+    private float _lifeTime = 10f;
+    private float _minLifeTime = 2f;
+    private float _maxLifeTime = 5f;
+    private float _timeAfterContact;
+
     private bool _hasColorChange = false;
 
     private void Awake()
@@ -18,6 +23,7 @@ public class Cube : MonoBehaviour
     private void OnEnable()
     {
         Invoke(nameof(ReturnToPool), _lifeTime);
+        _timeAfterContact = Random.Range(_minLifeTime, _maxLifeTime);
     }
 
     private void OnDisable()
@@ -30,7 +36,7 @@ public class Cube : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Platform") && _hasColorChange == false)
         {
-            Invoke(nameof(ReturnToPool), _lifeTime);
+            Invoke(nameof(ReturnToPool), _timeAfterContact);
             _renderer.material.color = new Color(Random.value, Random.value, Random.value);
             _hasColorChange = true;
         }
@@ -48,8 +54,6 @@ public class Cube : MonoBehaviour
         _hasColorChange = false;
     }
 
-    private void ReturnToPool()
-    {
+    private void ReturnToPool() =>
         CubePool.Instance.ReturnCube(this);
-    }
 }

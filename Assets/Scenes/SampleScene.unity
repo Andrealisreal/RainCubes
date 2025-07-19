@@ -1222,7 +1222,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cubePrefab: {fileID: 5251291973185555685, guid: 2a43123c152ebdf4299191b3f1a38bfe, type: 3}
-  _initialPoolSize: 20
+  _initialPoolSize: 30
 --- !u!114 &1851686890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1235,7 +1235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4e168fefd16da547836584432315bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnInterval: 0.1
+  _spawnInterval: 0.2
   _spawnAreaSize: 10
   _spawnHeight: 10
 --- !u!4 &1851686891

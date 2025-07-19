@@ -6,10 +6,8 @@ public class Spawner : MonoBehaviour
     [SerializeField] private float _spawnAreaSize = 5f;
     [SerializeField] private float _spawnHeight = 10f;
 
-    private void Start()
-    {
+    private void Start() =>
         InvokeRepeating(nameof(SpawnCube), 0f, _spawnInterval);
-    }
 
     private void SpawnCube()
     {
