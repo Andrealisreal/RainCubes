@@ -1,19 +1,28 @@
+using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(CubePool))]
 public class Spawner : MonoBehaviour
 {
     [SerializeField] private float _spawnInterval = 0.2f;
     [SerializeField] private float _spawnAreaSize = 5f;
     [SerializeField] private float _spawnHeight = 10f;
 
+    private CubePool _cubePool;
+
+    private void Awake()
+    {
+        _cubePool = GetComponent<CubePool>();
+    }
+
     private void Start() =>
-        InvokeRepeating(nameof(SpawnCube), 0f, _spawnInterval);
+        StartCoroutine(Countdown());
 
     private void SpawnCube()
     {
-        Cube cube = CubePool.Instance.GetCube();
+        Cube cube = _cubePool.GetCube();
 
-        if (cube == null)   
+        if (cube == null)
             return;
 
         float randomX = Random.Range(-_spawnAreaSize, _spawnAreaSize);
@@ -21,5 +30,17 @@ public class Spawner : MonoBehaviour
 
         cube.transform.position = transform.position + new Vector3(randomX, _spawnHeight, randomZ);
         cube.transform.rotation = Quaternion.identity;
+    }
+
+    private IEnumerator Countdown()
+    {
+        WaitForSeconds wait = new WaitForSeconds(_spawnInterval);
+
+        while (true)
+        {
+            SpawnCube();
+
+            yield return wait;
+        }
     }
 }

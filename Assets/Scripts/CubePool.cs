@@ -8,15 +8,8 @@ public class CubePool : MonoBehaviour
 
     private List<Cube> _pool = new List<Cube>();
 
-    public static CubePool Instance { get; private set; }
-
     private void Awake()
     {
-        if (Instance == null)
-            Instance = this;
-        else
-            Destroy(gameObject);
-
         for (int i = 0; i < _initialPoolSize; i++)
             CreateCube();
     }
@@ -33,11 +26,8 @@ public class CubePool : MonoBehaviour
             }
         }
 
-        return null;
+        return CreateCube();
     }
-
-    public void ReturnCube(Cube cube) =>
-        cube.gameObject.SetActive(false);
 
     private Cube CreateCube()
     {

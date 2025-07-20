@@ -1,5 +1,8 @@
+using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Renderer))]
 public class Cube : MonoBehaviour
 {
     private Renderer _renderer;
@@ -7,7 +10,6 @@ public class Cube : MonoBehaviour
 
     private Color _defaultColor = Color.white;
 
-    private float _lifeTime = 10f;
     private float _minLifeTime = 2f;
     private float _maxLifeTime = 5f;
     private float _timeAfterContact;
@@ -22,21 +24,19 @@ public class Cube : MonoBehaviour
 
     private void OnEnable()
     {
-        Invoke(nameof(ReturnToPool), _lifeTime);
         _timeAfterContact = Random.Range(_minLifeTime, _maxLifeTime);
     }
 
     private void OnDisable()
     {
-        CancelInvoke();
         ResetDefaults();
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Platform") && _hasColorChange == false)
+        if (collision.gameObject.GetComponent<Platform>() && _hasColorChange == false)
         {
-            Invoke(nameof(ReturnToPool), _timeAfterContact);
+            StartCoroutine(CountdownDeactivation());
             _renderer.material.color = new Color(Random.value, Random.value, Random.value);
             _hasColorChange = true;
         }
@@ -54,6 +54,12 @@ public class Cube : MonoBehaviour
         _hasColorChange = false;
     }
 
-    private void ReturnToPool() =>
-        CubePool.Instance.ReturnCube(this);
+    private IEnumerator CountdownDeactivation()
+    {
+        WaitForSeconds wait = new WaitForSeconds(_timeAfterContact);
+
+        yield return wait;
+
+        gameObject.SetActive(false);
+    }
 }
