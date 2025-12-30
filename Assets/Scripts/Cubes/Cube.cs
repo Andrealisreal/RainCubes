@@ -11,13 +11,7 @@ namespace Cubes
 
         private bool _hasColorChange;
 
-        public event Action IsDisabled;
-
-        protected override void OnDisable()
-        {
-            base.OnDisable();
-            IsDisabled?.Invoke();
-        }
+        public event Action<Cube> Disabled;
         
         private void OnCollisionEnter(Collision collision)
         {
@@ -28,9 +22,10 @@ namespace Cubes
             Renderer.material.color = Random.ColorHSV();
             _hasColorChange = true;
         }
-
+        
         protected override void ResetDefaults()
         {
+            Disabled?.Invoke(this);
             base.ResetDefaults();
             Renderer.material.color = _defaultColor;
             _hasColorChange = false;

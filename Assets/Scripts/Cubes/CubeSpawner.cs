@@ -1,10 +1,12 @@
+using System;
 using System.Collections;
 using Generics.Spawners;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Cubes
 {
-    public class CubeSpawner : Spawner<Cube>   
+    public class CubeSpawner : Spawner<Cube>
     {
         [SerializeField] private float _spawnInterval = 0.2f;
         [SerializeField] private float _spawnAreaSize = 5f;
@@ -12,23 +14,25 @@ namespace Cubes
         
         private WaitForSeconds _wait;
 
+        public event Action<Cube> Disabled;
+
         private void Start()
         {
             _wait = new WaitForSeconds(_spawnInterval);
             StartCoroutine(CooldownRotine());
         }
         
-        protected override void Spawn()
+        public override Cube Spawn()
         {
-            base.Spawn();
-            
-            if (CurrentItem == null)
-                return;
+            var cube = base.Spawn();
 
             var randomX = Random.Range(-_spawnAreaSize, _spawnAreaSize);
             var randomZ = Random.Range(-_spawnAreaSize, _spawnAreaSize);
 
-            CurrentItem.transform.position = transform.position + new Vector3(randomX, _spawnHeight, randomZ);
+            cube.transform.position = transform.position + new Vector3(randomX, _spawnHeight, randomZ);
+            cube.Disabled += OnDisabled;
+            
+            return cube;
         }
         
         private IEnumerator CooldownRotine()
@@ -39,6 +43,12 @@ namespace Cubes
 
                 yield return _wait;
             }
+        }
+
+        private void OnDisabled(Cube cube)
+        {
+            Disabled?.Invoke(cube);
+            cube.Disabled -= OnDisabled;
         }
     }
 }

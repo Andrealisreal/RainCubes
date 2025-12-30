@@ -23,13 +23,13 @@ namespace Generics.Objects
             _rigidbody = GetComponent<Rigidbody>();
         }
 
-        private void OnEnable()
+        protected virtual void OnEnable()
         {
             TimeCooldown = Random.Range(MinLifeTime, MaxLifeTime);
             _wait = new WaitForSeconds(TimeCooldown);
         }
 
-        protected virtual void OnDisable()
+        private void OnDisable()
         {
             ResetDefaults();
         }
