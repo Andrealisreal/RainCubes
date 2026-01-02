@@ -1,14 +1,11 @@
 using Bombs;
 using Cubes;
-using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(CubePool), typeof(CubeSpawner))]
 [RequireComponent(typeof(BombsPool), typeof(BombsSpawner), typeof(Exploder))]
 public class Game : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI _text;
-    
     private CubeSpawner _cubeSpawner;
     private BombsSpawner _bombsSpawner;
     private Exploder _exploder;

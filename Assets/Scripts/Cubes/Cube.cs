@@ -15,7 +15,7 @@ namespace Cubes
         
         private void OnCollisionEnter(Collision collision)
         {
-            if (collision.gameObject.GetComponent<Platform>() == false || _hasColorChange) 
+            if (_hasColorChange || collision.gameObject.GetComponent<Platform>() == false) 
                 return;
             
             StartCoroutine(CooldownRoutine());

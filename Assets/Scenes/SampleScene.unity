@@ -158,7 +158,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000061035156, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1920, y: 983}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &146364397
@@ -208,17 +208,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 146364395}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d62ff8601cba0c845800718a1b3deca1, type: 3}
+  m_Script: {fileID: 11500000, guid: adfa17649642cd14bb3056a79c2959b9, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UI.ObjectCounterUI
+  m_EditorClassIdentifier: Assembly-CSharp::UI.CountBombUI
   _spawnCountText: {fileID: 1380718094}
   _createdCountText: {fileID: 885472081}
   _activeCountText: {fileID: 1594506705}
-  _counterType: 1
-  _cubeSpawner: {fileID: 1851686893}
-  _cubePool: {fileID: 1851686889}
-  _bombSpawner: {fileID: 1851686894}
-  _bombPool: {fileID: 1851686895}
+  _spawner: {fileID: 1851686894}
+  _pool: {fileID: 1851686895}
 --- !u!1 &214581157
 GameObject:
   m_ObjectHideFlags: 0
@@ -1970,7 +1967,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -0.000061035156, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1920, y: 983}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1127722254
@@ -2020,17 +2017,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1127722252}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d62ff8601cba0c845800718a1b3deca1, type: 3}
+  m_Script: {fileID: 11500000, guid: 93065b0fb09befe468f5cf9cc667e2fb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UI.ObjectCounterUI
+  m_EditorClassIdentifier: Assembly-CSharp::UI.CountCubeUI
   _spawnCountText: {fileID: 630706146}
   _createdCountText: {fileID: 929000393}
   _activeCountText: {fileID: 1305680221}
-  _counterType: 0
-  _cubeSpawner: {fileID: 1851686893}
-  _cubePool: {fileID: 1851686889}
-  _bombSpawner: {fileID: 1851686894}
-  _bombPool: {fileID: 1851686895}
+  _spawner: {fileID: 1851686893}
+  _pool: {fileID: 1851686889}
 --- !u!1 &1169472312
 GameObject:
   m_ObjectHideFlags: 0
@@ -3408,7 +3402,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4299402b9dede04196d5fb95d5936b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game
-  _text: {fileID: 0}
 --- !u!1 &1893407073
 GameObject:
   m_ObjectHideFlags: 0

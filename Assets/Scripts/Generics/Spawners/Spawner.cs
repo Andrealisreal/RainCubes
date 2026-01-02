@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Generics.Spawners
 {
-    public class Spawner<T> : MonoBehaviour where T : Component
+    public abstract class Spawner<T> : MonoBehaviour where T : Component
     {
         [SerializeField] protected ObjectsPool<T> ObjectsPool;
 
